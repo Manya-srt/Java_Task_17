@@ -7,19 +7,20 @@ import java.io.*;
 public class Task_17 {
         public static void main(String[] args) {
             String input, output;
+            int linescount = 0;
+            int lcount = 0;
 
             try {
                 File file = new File("file.txt");
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
-                int linescount = 0;
 
                 while((input = bufferedReader.readLine()) != null) {
                     System.out.println(input);
                     linescount++;
-                }
+                    }
                 bufferedReader.close();
-                System.out.println("Количество строк в файле: " + linescount);
+                //System.out.println("Количество строк в файле: " + linescount);
             }
             catch (IOException e) {
                 System.out.println("Ошибка: " + e);
@@ -27,17 +28,19 @@ public class Task_17 {
 
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                System.out.println("Чтобы остановить запись в файл - введите слово 'stop'");
+                System.out.println("Введите сообщение");
             File file = new File("file.txt");
 
             try (FileWriter fileWriter = new FileWriter(file);){
                 do {
-                    System.out.print(" ");
                     output = bufferedReader.readLine();
-                    if(output.compareTo("stop")== 0) break;
+                    if(linescount == lcount)
+                        break;
+                    System.out.print(" ");
                     output = output + "\r\n";
                     fileWriter.write(output);
-                } while(output.compareTo("stop") != 0);
+                    lcount++;
+                } while(linescount != lcount);
             } catch(IOException e){
                 System.out.println("Ошибка: " + e);
         }
